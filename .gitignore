@@ -50,3 +50,10 @@
 
 # Embedded web-server pid file
 /.web-server-pid
+
+#webpack
+/src/Resources/node_modules/
+/.idea
+/public/dist/
+/templates/dist/*
+/src/Resources/dist/*

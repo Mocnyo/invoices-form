@@ -1,0 +1,88 @@
+{
+  "name": "invoice-form",
+  "version": "1.0.0-alpha.0",
+  "description": "crm",
+  "private": true,
+  "scripts": {
+    "build-dev": "webpack --config webpack.dev.js --progress --display=minimal",
+    "watch-dev": "webpack --config webpack.dev.js --watch --progress --display=minimal",
+    "build-prod": "webpack --config webpack.prod.js --progress --display=minimal",
+    "unit": "jest",
+    "test": "npm run unit",
+    "lint": "eslint --ext .js,.vue src test/unit"
+  },
+  "author": "Dominik Jaruga",
+  "license": "proprietary",
+  "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/plugin-transform-runtime": "^7.9.6",
+    "@babel/preset-env": "^7.1.6",
+    "@vue/babel-preset-app": "^3.8.0",
+    "@vue/test-utils": "^1.0.0-beta.29",
+    "babel-core": "^7.0.0-beta",
+    "babel-jest": "^24.8.0",
+    "babel-loader": "^8.0.4",
+    "babel-runtime": "^7.0.0-beta",
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^1.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^24.8.0",
+    "less-loader": "^4.1.0",
+    "mini-css-extract-plugin": "^0.4.4",
+    "node-template": "^0.1.13",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "style-loader": "^0.23.1",
+    "terser-webpack-plugin": "^1.2.3",
+    "uglifyjs-webpack-plugin": "^2.0.1",
+    "url-loader": "^1.1.2",
+    "vue-jest": "^3.0.4",
+    "vue-loader": "^15.4.2",
+    "vue-template-compiler": "^2.5.17",
+    "vue2-filters": "^0.3.0",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-merge": "^4.1.4"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.9.6",
+    "@fullcalendar/core": "^4.4.2",
+    "@fullcalendar/daygrid": "^4.4.2",
+    "@fullcalendar/vue": "^4.4.2",
+    "axios": "^0.19.0",
+    "babel-polyfill": "^6.26.0",
+    "codemirror": "^5.47.0",
+    "datatables.net": "^1.10.19",
+    "datatables.net-bs": "^1.10.19",
+    "datatables.net-buttons": "^1.5.6",
+    "datatables.net-dt": "^1.10.19",
+    "jquery": "^3.4.1",
+    "less": "^3.8.1",
+    "moment-timezone": "^0.5.25",
+    "pace": "0.0.4",
+    "popper.js": "^1.15.0",
+    "save": "^2.4.0",
+    "vue": "^2.5.17",
+    "vuex": "^3.1.0"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^vue$": "vue/dist/vue.common.js"
+    },
+    "roots": [
+      "test"
+    ],
+    "moduleDirectories": [
+      "test",
+      "node_modules"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "vue"
+    ],
+    "transform": {
+      "^.+\\.js$": "./node_modules/babel-jest",
+      ".*\\.(vue)$": "./node_modules/vue-jest"
+    }
+  }
+}

@@ -1,0 +1,276 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Wystaw fakture!{% endblock %}
+
+{% block body %}
+
+    <div class="col-xl-10 col-lg-12 col-md-9">
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('invoice_list') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right">Admin</a>
+        {% endif %}
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <form id="invoice">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Wystaw fakture!</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Dokument</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="p-1">
+                                <label>Rodzaj dokumentu</label>
+                                <input type="text" class="form-control form-control" placeholder="Faktura VAT" disabled>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="p-1">
+                                <label>Numer faktury</label>
+                                <input type="text" class="form-control form-control" placeholder="FA/22/1/2021">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="p-1">
+                                <label>Data wystawienia</label>
+                                <input type="date" class="form-control form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="p-1">
+                                <label>Język</label>
+                                <input type="text" class="form-control form-control" placeholder="Polski" disabled>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="p-1">
+                                <label>Miejsce wystawienia faktury</label>
+                                <input type="text" class="form-control form-control" placeholder="Szczecin">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="p-1">
+                                <label>Data sprzedaży</label>
+                                <input type="date" class="form-control form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Kontrachenci</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="p-1">
+                                <label>Sprzedawca</label>
+                                <input type="text" class="form-control form-control" placeholder="Jan Kowalski">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="p-1">
+                                <label>Nabywca</label>
+                                <input type="text" class="form-control form-control" placeholder="Andrzej Nowak">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="p-1">
+                                <label>NIP</label>
+                                <input type="text" class="form-control form-control" placeholder="9998887776">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="p-1">
+                                <label>NIP</label>
+                                <input type="text" class="form-control form-control" placeholder="6777888999">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="p-1">
+                                <label>Adres</label>
+                                <input type="text" class="form-control form-control"
+                                       placeholder="Wolności 5">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="p-1">
+                                <label>Adres</label>
+                                <input type="text" class="form-control form-control"
+                                       placeholder="Wolności 3">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <div class="p-1">
+                                        <label>Miasto</label>
+                                        <input type="text" class="form-control form-control"
+                                               placeholder="Szczecin">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="p-1">
+                                        <label>Kod</label>
+                                        <input type="text" class="form-control form-control"
+                                               placeholder="70234">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <div class="p-1">
+                                        <label>Miasto</label>
+                                        <input type="text" class="form-control form-control"
+                                               placeholder="Choszczno">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="p-1">
+                                        <label>Kod</label>
+                                        <input type="text" class="form-control form-control"
+                                               placeholder="73200">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="p-1">
+                                <label>Podpis sprzedawcy</label>
+                                <input type="text" class="form-control form-control" placeholder="Jan Kowalski">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="p-1">
+                                <label>Podpis nabywcy</label>
+                                <input type="text" class="form-control form-control" placeholder="Andrzej Nowak">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Nazwa towaru lub usługi</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+{#                        <div class="col-lg-2">#}
+{#                            <div class="p-1">#}
+{#                                <input type="test" class="form-control form-control"#}
+{#                                       placeholder="Enter Email Address...">#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="col-lg-2">#}
+{#                            <div class="p-1">#}
+{#                                <input type="test" class="form-control form-control"#}
+{#                                       placeholder="Enter Email Address...">#}
+{#                            </div>#}
+{#                        </div>#}
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">lp.</th>
+                                <th scope="col">Nazwa towaru/usługi</th>
+                                <th scope="col">Ilość</th>
+                                <th scope="col">Jm</th>
+                                <th scope="col">Cena netto</th>
+                                <th scope="col">VAT</th>
+                                <th scope="col">Kwota brutto</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">1.</th>
+                                <td><input type="text"></td>
+                                <td><input type="text" width="50px"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-3">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Płatność</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="p-1">
+                                <label>Status</label>
+                                <input type="test" class="form-control form-control"
+                                       placeholder="Zapłacono">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="p-1">
+                                <label>Sposób płatności</label>
+                                <input type="test" class="form-control form-control"
+                                       placeholder="Przelew">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-3">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mt-4">Wygeneruj</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-1">
+                                <div class="text-center">
+                                    <a href="#" class="btn btn-primary btn-user btn-block m-auto">
+                                        Generate
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

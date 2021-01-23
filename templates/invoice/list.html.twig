@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Wystaw fakture!{% endblock %}
+
+{% block body %}
+
+    <div class="col-xl-10 col-lg-12 col-md-9">
+            <a href="{{ path('invoice') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right">Wystaw fakture</a>
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Wystawione faktury!</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <row>
+                    <div class="col-lg-12">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Numer Faktury</th>
+                                <th scope="col">Utworzona</th>
+                                <th scope="col">Akcje</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for invoice in invoices %}
+                            <tr>
+                                <th scope="row">{{ invoice.id }}</th>
+                                <td>{{ invoice.number }}</td>
+                                <td>{{ invoice.created|date('d-m-Y H:i') }}</td>
+                                <td>
+                                    <a href="#" class="btn btn-info">Pokaż</a>
+                                    <a href="#" class="btn btn-primary">Pobierz</a>
+                                    <a href="#" class="btn btn-danger">Usuń</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </row>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
