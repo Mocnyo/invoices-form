@@ -1,0 +1,147 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Faktura {{ invoice.number }}{% endblock %}
+
+{% block body %}
+
+    <div class="col-xl-10 col-lg-12 col-md-9">
+        <a href="{{ path('invoice_new') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right">Wystaw
+            fakture</a>
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Faktura nr {{ invoice.number }}</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card bg-light mb-3">
+
+                            <div class="card-body">
+                                <h5 class="card-title">Dokument</h5>
+                                <p class="card-text">
+                                <div class="row">
+                                    <div class="col-lg-6">ID</div>
+                                    <div class="col-lg-6">{{ invoice.id }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">Numer faktury</div>
+                                    <div class="col-lg-6">{{ invoice.number }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">Data wystawienia</div>
+                                    <div class="col-lg-6">{{ invoice.saleDate|date('d-m-Y H:i') }}</div>
+                                </div>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card bg-light mb-3">
+
+                            <div class="card-body">
+                                <h5 class="card-title">Kontrachenci</h5>
+                                <p class="card-text">
+                                <div class="row">
+                                    <div class="col-lg-6"><h3>Sprzedawca</h3></div>
+                                    <div class="col-lg-6"><h3>Nabywca</h3></div>
+                                </div>
+
+                                <div class="row">
+                                    {% for contractor in invoice.contractor %}
+                                    {% if contractor.type == constant('App\\Entity\\Enums\\ContractorTypeEnum::SELLER') %}
+                                    <div class="col-lg-6">
+                                        <p class="card-text">Nazwa: {{ contractor.name }}</p>
+                                        <p class="card-text">NIP: {{ contractor.nip }}</p>
+                                        <p class="card-text">Adres: {{ contractor.address }} Kod: {{ contractor.code }}</p>
+                                        <p class="card-text">Miasto: {{ contractor.city }}</p>
+                                    </div>
+                                    {% elseif contractor.type == constant('App\\Entity\\Enums\\ContractorTypeEnum::BUYER') %}
+                                    <div class="col-lg-6">
+                                        <p class="card-text">Nazwa: {{ contractor.name }}</p>
+                                        <p class="card-text">NIP: {{ contractor.nip }}</p>
+                                        <p class="card-text">Adres: {{ contractor.address }} Kod: {{ contractor.code }}</p>
+                                        <p class="card-text">Miasto: {{ contractor.city }}</p>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card bg-light mb-3">
+
+                            <div class="card-body">
+                                <h5 class="card-title">Nazwa towaru lub usługi</h5>
+                                <p class="card-text">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Nazwa towaru/usługi</th>
+                                        <th scope="col">Ilość</th>
+                                        <th scope="col">Jm</th>
+                                        <th scope="col">Cena netto</th>
+                                        <th scope="col">VAT</th>
+                                        <th scope="col">Cena brutto</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% set sum = 0 %}
+                                    {% for item in invoice.items %}
+                                    <tr>
+                                        <th scope="row">{{ item.id }}</th>
+                                        <td>{{ item.name }}</td>
+                                        <td>{{ item.quantity }}</td>
+                                        <td>{{ item.measure }}</td>
+                                        <td>{{ item.netPrice }}</td>
+                                        <td>{{ item.vatRate }}%</td>
+                                        <td>{{ item.grossPrice }}</td>
+                                    </tr>
+                                        {% set sum = item.grossPrice + sum %}
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                                </p>
+                                <h2 class="float-right">Razem: {{ sum }}zł</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card bg-light mb-3">
+
+                            <div class="card-body">
+                                <h5 class="card-title">Płatność</h5>
+                                <p class="card-text">
+                                <div class="row">
+                                    <div class="col-lg-6">Status</div>
+                                    <div class="col-lg-6">{{ invoice.payment.statusName }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">Metoda płatności</div>
+                                    <div class="col-lg-6">{{ invoice.payment.methodName }}</div>
+                                </div>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

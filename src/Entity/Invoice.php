@@ -28,6 +28,11 @@ class Invoice
     private $number;
 
     /**
+     * @ORM\Column(type="integer", length=255)
+     */
+    private $placeOfIssue;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $dateOfIssue;
@@ -39,25 +44,30 @@ class Invoice
 
     /**
      * @var Contractor[]|ArrayCollection
-     * @ORM\OneToMany(targetEntity="Contractor", mappedBy="invoice")
+     * @ORM\OneToMany(targetEntity="Contractor", mappedBy="invoice", cascade={"persist","remove"})
      */
-    private $contractor;
+    private $contractors;
 
     /**
      * @var Item[]|ArrayCollection
-     * @ORM\OneToMany(targetEntity="Item", mappedBy="invoice")
+     * @ORM\OneToMany(targetEntity="Item", mappedBy="invoice", cascade={"persist","remove"})
      */
-    private $item;
+    private $items;
 
     /**
      * @var Payment
-     * @ORM\OneToOne(targetEntity="Payment", mappedBy="invoice")
+     * @ORM\OneToOne(targetEntity="Payment", mappedBy="invoice", cascade={"persist","remove"})
      */
     private $payment;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $fileName;
+
     public function __construct() {
-        $this->contractor = new ArrayCollection();
-        $this->item = new ArrayCollection();
+        $this->contractors = new ArrayCollection();
+        $this->items = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -99,5 +109,85 @@ class Invoice
         $this->saleDate = $saleDate;
 
         return $this;
+    }
+
+    /**
+     * @return Contractor[]|ArrayCollection
+     */
+    public function getContractors()
+    {
+        return $this->contractors;
+    }
+
+    /**
+     * @param Contractor[]|ArrayCollection $contractors
+     */
+    public function setContractors($contractors): void
+    {
+        $this->contractors = $contractors;
+    }
+
+    /**
+     * @return Item[]|ArrayCollection
+     */
+    public function getItems()
+    {
+        return $this->items;
+    }
+
+    /**
+     * @param Item[]|ArrayCollection $items
+     */
+    public function setItems($items): void
+    {
+        $this->items = $items;
+    }
+
+    /**
+     * @return Payment
+     */
+    public function getPayment(): Payment
+    {
+        return $this->payment;
+    }
+
+    /**
+     * @param Payment $payment
+     */
+    public function setPayment(Payment $payment): void
+    {
+        $this->payment = $payment;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFileName()
+    {
+        return $this->fileName;
+    }
+
+    /**
+     * @param mixed $fileName
+     */
+    public function setFileName($fileName): void
+    {
+        $this->fileName = $fileName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlaceOfIssue()
+    {
+        return $this->placeOfIssue;
+    }
+
+    /**
+     * @param mixed $placeOfIssue
+     */
+    public function setPlaceOfIssue($placeOfIssue): void
+    {
+        $this->placeOfIssue = $placeOfIssue;
     }
 }

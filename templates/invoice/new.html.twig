@@ -6,21 +6,20 @@
 
     <div class="col-xl-10 col-lg-12 col-md-9">
         {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('invoice_list') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right">Admin</a>
+            <a href="{{ path('invoice_list') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right">Wystawione faktury</a>
         {% endif %}
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
-                <form id="invoice">
-                    <!-- Nested Row within Card Body -->
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="p-5">
-                                <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Wystaw fakture!</h1>
-                                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Wystaw fakture!</h1>
                             </div>
                         </div>
                     </div>
+                </div>
+                {{ form_start(form) }}
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="text-center">
@@ -32,19 +31,19 @@
                         <div class="col-lg-4">
                             <div class="p-1">
                                 <label>Rodzaj dokumentu</label>
-                                <input type="text" class="form-control form-control" placeholder="Faktura VAT" disabled>
+                                {{ form_widget(form.typeOfDocument, {'attr': {'class': 'form-control form-control'}}) }}
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="p-1">
                                 <label>Numer faktury</label>
-                                <input type="text" class="form-control form-control" placeholder="FA/22/1/2021">
+                                {{ form_widget(form.number, {'attr': {'class': 'form-control form-control'}}) }}
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="p-1">
                                 <label>Data wystawienia</label>
-                                <input type="date" class="form-control form-control">
+                                {{ form_widget(form.dateOfIssue, {'attr': {'class': 'form-control form-control'}}) }}
                             </div>
                         </div>
                     </div>
@@ -52,19 +51,19 @@
                         <div class="col-lg-4">
                             <div class="p-1">
                                 <label>Język</label>
-                                <input type="text" class="form-control form-control" placeholder="Polski" disabled>
+                                {{ form_widget(form.language, {'attr': {'class': 'form-control form-control'}}) }}
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="p-1">
                                 <label>Miejsce wystawienia faktury</label>
-                                <input type="text" class="form-control form-control" placeholder="Szczecin">
+                                {{ form_widget(form.placeOfIssue, {'attr': {'class': 'form-control form-control'}}) }}
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="p-1">
                                 <label>Data sprzedaży</label>
-                                <input type="date" class="form-control form-control">
+                                {{ form_widget(form.saleDate, {'attr': {'class': 'form-control form-control'}}) }}
                             </div>
                         </div>
                     </div>
@@ -81,13 +80,13 @@
                         <div class="col-lg-6">
                             <div class="p-1">
                                 <label>Sprzedawca</label>
-                                <input type="text" class="form-control form-control" placeholder="Jan Kowalski">
+                                {{ form_widget(form.seller.name) }}
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="p-1">
                                 <label>Nabywca</label>
-                                <input type="text" class="form-control form-control" placeholder="Andrzej Nowak">
+                                {{ form_widget(form.buyer.name) }}
                             </div>
                         </div>
                     </div>
@@ -95,13 +94,13 @@
                         <div class="col-lg-6">
                             <div class="p-1">
                                 <label>NIP</label>
-                                <input type="text" class="form-control form-control" placeholder="9998887776">
+                                {{ form_widget(form.seller.nip) }}
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="p-1">
                                 <label>NIP</label>
-                                <input type="text" class="form-control form-control" placeholder="6777888999">
+                                {{ form_widget(form.buyer.nip) }}
                             </div>
                         </div>
                     </div>
@@ -109,15 +108,13 @@
                         <div class="col-lg-6">
                             <div class="p-1">
                                 <label>Adres</label>
-                                <input type="text" class="form-control form-control"
-                                       placeholder="Wolności 5">
+                                {{ form_widget(form.seller.address) }}
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="p-1">
                                 <label>Adres</label>
-                                <input type="text" class="form-control form-control"
-                                       placeholder="Wolności 3">
+                                {{ form_widget(form.buyer.address) }}
                             </div>
                         </div>
                     </div>
@@ -127,15 +124,13 @@
                                 <div class="col-sm-8">
                                     <div class="p-1">
                                         <label>Miasto</label>
-                                        <input type="text" class="form-control form-control"
-                                               placeholder="Szczecin">
+                                        {{ form_widget(form.seller.city) }}
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="p-1">
                                         <label>Kod</label>
-                                        <input type="text" class="form-control form-control"
-                                               placeholder="70234">
+                                        {{ form_widget(form.seller.code) }}
                                     </div>
                                 </div>
                             </div>
@@ -145,15 +140,13 @@
                                 <div class="col-sm-8">
                                     <div class="p-1">
                                         <label>Miasto</label>
-                                        <input type="text" class="form-control form-control"
-                                               placeholder="Choszczno">
+                                        {{ form_widget(form.buyer.city) }}
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="p-1">
                                         <label>Kod</label>
-                                        <input type="text" class="form-control form-control"
-                                               placeholder="73200">
+                                        {{ form_widget(form.buyer.code) }}
                                     </div>
                                 </div>
                             </div>
@@ -163,13 +156,13 @@
                         <div class="col-lg-6">
                             <div class="p-1">
                                 <label>Podpis sprzedawcy</label>
-                                <input type="text" class="form-control form-control" placeholder="Jan Kowalski">
+                                {{ form_widget(form.seller.signature) }}
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="p-1">
                                 <label>Podpis nabywcy</label>
-                                <input type="text" class="form-control form-control" placeholder="Andrzej Nowak">
+                                {{ form_widget(form.buyer.signature) }}
                             </div>
                         </div>
                     </div>
@@ -184,18 +177,6 @@
                         </div>
                     </div>
                     <div class="row">
-{#                        <div class="col-lg-2">#}
-{#                            <div class="p-1">#}
-{#                                <input type="test" class="form-control form-control"#}
-{#                                       placeholder="Enter Email Address...">#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <div class="col-lg-2">#}
-{#                            <div class="p-1">#}
-{#                                <input type="test" class="form-control form-control"#}
-{#                                       placeholder="Enter Email Address...">#}
-{#                            </div>#}
-{#                        </div>#}
                         <table class="table table-striped">
                             <thead>
                             <tr>
@@ -209,15 +190,18 @@
                             </tr>
                             </thead>
                             <tbody>
+                            {% for item in form.items %}
                             <tr>
                                 <th scope="row">1.</th>
-                                <td><input type="text"></td>
-                                <td><input type="text" width="50px"></td>
-                                <td><input type="text"></td>
-                                <td><input type="text"></td>
-                                <td><input type="text"></td>
+                                <td>{{ form_widget(item.name) }}</td>
+                                <td>{{ form_widget(item.quantity) }}</td>
+                                <td>{{ form_widget(item.measure) }}</td>
+                                <td>{{ form_widget(item.netPrice) }}</td>
+                                <td>{{ form_widget(item.vatRate) }}</td>
+                                <td>{{ form_widget(item.grossPrice) }}</td>
                                 <td></td>
                             </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -235,40 +219,29 @@
                         <div class="col-lg-6">
                             <div class="p-1">
                                 <label>Status</label>
-                                <input type="test" class="form-control form-control"
-                                       placeholder="Zapłacono">
+                                {{ form_widget(form.payment.status) }}
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="p-1">
                                 <label>Sposób płatności</label>
-                                <input type="test" class="form-control form-control"
-                                       placeholder="Przelew">
+                                {{ form_widget(form.payment.method) }}
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="p-3">
+                            <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mt-4">Wygeneruj</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="p-1">
-                                <div class="text-center">
-                                    <a href="#" class="btn btn-primary btn-user btn-block m-auto">
-                                        Generate
-                                    </a>
+                                    {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary btn-user btn-block m-auto'}}) }}
+
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                </form>
+                {{ form_end(form) }}
             </div>
         </div>
     </div>

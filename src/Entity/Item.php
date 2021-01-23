@@ -49,7 +49,7 @@ class Item
 
     /**
      * @var Invoice
-     * @ORM\ManyToOne(targetEntity="Invoice", inversedBy="item")
+     * @ORM\ManyToOne(targetEntity="Invoice", inversedBy="items")
      * @ORM\JoinColumn(name="invoice_id", referencedColumnName="id")
      */
     private $invoice;

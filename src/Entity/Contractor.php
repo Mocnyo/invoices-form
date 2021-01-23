@@ -54,7 +54,7 @@ class Contractor
 
     /**
      * @var Invoice
-     * @ORM\ManyToOne(targetEntity="Invoice", inversedBy="contractor")
+     * @ORM\ManyToOne(targetEntity="Invoice", inversedBy="contractors")
      * @ORM\JoinColumn(name="invoice_id", referencedColumnName="id")
      */
     private $invoice;
@@ -146,5 +146,21 @@ class Contractor
         $this->signature = $signature;
 
         return $this;
+    }
+
+    /**
+     * @return Invoice
+     */
+    public function getInvoice(): Invoice
+    {
+        return $this->invoice;
+    }
+
+    /**
+     * @param Invoice $invoice
+     */
+    public function setInvoice(Invoice $invoice): void
+    {
+        $this->invoice = $invoice;
     }
 }
