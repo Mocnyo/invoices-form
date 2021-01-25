@@ -60,10 +60,10 @@ class Invoice
      */
     private $payment;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $fileName;
+    public function __toString()
+    {
+        return $this->getNumber();
+    }
 
     public function __construct() {
         $this->contractors = new ArrayCollection();
@@ -146,7 +146,7 @@ class Invoice
     /**
      * @return Payment
      */
-    public function getPayment(): Payment
+    public function getPayment(): ?Payment
     {
         return $this->payment;
     }
@@ -157,22 +157,6 @@ class Invoice
     public function setPayment(Payment $payment): void
     {
         $this->payment = $payment;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFileName()
-    {
-        return $this->fileName;
-    }
-
-    /**
-     * @param mixed $fileName
-     */
-    public function setFileName($fileName): void
-    {
-        $this->fileName = $fileName;
     }
 
     /**

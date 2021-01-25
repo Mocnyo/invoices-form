@@ -1,0 +1,31 @@
+{% block InvoiceItem_label %}{% endblock %}
+
+{% block InvoiceItem_widget %}
+    <style>
+        input {
+            width: 100%;
+        }
+    </style>
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-sm-4">
+                {{ form_widget(form.name) }}
+            </div>
+            <div class="col-sm-2">
+                {{ form_widget(form.quantity) }}
+            </div>
+            <div class="col-sm-1">
+                {{ form_widget(form.measure) }}
+            </div>
+            <div class="col-sm-2">
+                {{ form_widget(form.netPrice) }}
+            </div>
+            <div class="col-sm-1">
+                {{ form_widget(form.vatRate) }}
+            </div>
+            <div class="col-sm-2">
+                {{ form_widget(form.grossPrice) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -41,7 +41,7 @@
                                 <td>{{ invoice.createdAt|date('d-m-Y H:i') }}</td>
                                 <td>
                                     <a href="{{ path('invoice_show', { 'id': invoice.id }) }}" class="btn btn-info">Pokaż</a>
-                                    <a href="#" class="btn btn-primary">Pobierz</a>
+                                    <a href="{{ path('invoice_download', { 'id' : invoice.id}) }}" class="btn btn-primary">Pobierz</a>
                                     <a href="{{ path('invoice_delete', { 'id': invoice.id }) }}" class="btn btn-danger"
                                        onclick="return confirm('Jesteś pewny że chcesz usunąć fakture?')">Usuń</a>
                                 </td>

@@ -6,7 +6,8 @@
 
     <div class="col-xl-10 col-lg-12 col-md-9">
         {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('invoice_list') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right">Wystawione faktury</a>
+            <a href="{{ path('invoice_list') }}"
+               class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right">Wystawione faktury</a>
         {% endif %}
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
@@ -18,232 +19,248 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-12">
+                        {% for message in app.flashes('success') %}
+                            <div class="alert alert-success">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
+                {% form_theme form 'jquery.collection.html.twig' %}
+                {# {{ form(form) }} #}
                 {{ form_start(form) }}
-                    <div class="row">
-                        <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Dokument</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="p-1">
+                            <label>Rodzaj dokumentu</label>
+                            {{ form_widget(form.typeOfDocument, {'attr': {'class': 'form-control form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="p-1">
+                            <label>Numer faktury</label>
+                            {{ form_widget(form.number, {'attr': {'class': 'form-control form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="p-1">
+                            <label>Data wystawienia</label>
+                            {{ form_widget(form.dateOfIssue, {'attr': {'class': 'form-control form-control'}}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="p-1">
+                            <label>Język</label>
+                            {{ form_widget(form.language, {'attr': {'class': 'form-control form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="p-1">
+                            <label>Miejsce wystawienia faktury</label>
+                            {{ form_widget(form.placeOfIssue, {'attr': {'class': 'form-control form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="p-1">
+                            <label>Data sprzedaży</label>
+                            {{ form_widget(form.saleDate, {'attr': {'class': 'form-control form-control'}}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Dokument</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Kontrachenci</h1>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="p-1">
-                                <label>Rodzaj dokumentu</label>
-                                {{ form_widget(form.typeOfDocument, {'attr': {'class': 'form-control form-control'}}) }}
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="p-1">
-                                <label>Numer faktury</label>
-                                {{ form_widget(form.number, {'attr': {'class': 'form-control form-control'}}) }}
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="p-1">
-                                <label>Data wystawienia</label>
-                                {{ form_widget(form.dateOfIssue, {'attr': {'class': 'form-control form-control'}}) }}
-                            </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="p-1">
+                            <label>Sprzedawca</label>
+                            {{ form_widget(form.seller.name) }}
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="p-1">
-                                <label>Język</label>
-                                {{ form_widget(form.language, {'attr': {'class': 'form-control form-control'}}) }}
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="p-1">
-                                <label>Miejsce wystawienia faktury</label>
-                                {{ form_widget(form.placeOfIssue, {'attr': {'class': 'form-control form-control'}}) }}
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="p-1">
-                                <label>Data sprzedaży</label>
-                                {{ form_widget(form.saleDate, {'attr': {'class': 'form-control form-control'}}) }}
-                            </div>
+                    <div class="col-lg-6">
+                        <div class="p-1">
+                            <label>Nabywca</label>
+                            {{ form_widget(form.buyer.name) }}
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="p-5">
-                                <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Kontrachenci</h1>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="p-1">
+                            <label>NIP</label>
+                            {{ form_widget(form.seller.nip) }}
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="p-1">
+                            <label>NIP</label>
+                            {{ form_widget(form.buyer.nip) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="p-1">
+                            <label>Adres</label>
+                            {{ form_widget(form.seller.address) }}
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="p-1">
+                            <label>Adres</label>
+                            {{ form_widget(form.buyer.address) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="p-1">
+                                    <label>Miasto</label>
+                                    {{ form_widget(form.seller.city) }}
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="p-1">
+                                    <label>Kod</label>
+                                    {{ form_widget(form.seller.code) }}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="p-1">
-                                <label>Sprzedawca</label>
-                                {{ form_widget(form.seller.name) }}
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="p-1">
-                                <label>Nabywca</label>
-                                {{ form_widget(form.buyer.name) }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="p-1">
-                                <label>NIP</label>
-                                {{ form_widget(form.seller.nip) }}
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="p-1">
-                                <label>NIP</label>
-                                {{ form_widget(form.buyer.nip) }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="p-1">
-                                <label>Adres</label>
-                                {{ form_widget(form.seller.address) }}
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="p-1">
-                                <label>Adres</label>
-                                {{ form_widget(form.buyer.address) }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="row">
-                                <div class="col-sm-8">
-                                    <div class="p-1">
-                                        <label>Miasto</label>
-                                        {{ form_widget(form.seller.city) }}
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="p-1">
-                                        <label>Kod</label>
-                                        {{ form_widget(form.seller.code) }}
-                                    </div>
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="p-1">
+                                    <label>Miasto</label>
+                                    {{ form_widget(form.buyer.city) }}
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="row">
-                                <div class="col-sm-8">
-                                    <div class="p-1">
-                                        <label>Miasto</label>
-                                        {{ form_widget(form.buyer.city) }}
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="p-1">
-                                        <label>Kod</label>
-                                        {{ form_widget(form.buyer.code) }}
-                                    </div>
+                            <div class="col-sm-4">
+                                <div class="p-1">
+                                    <label>Kod</label>
+                                    {{ form_widget(form.buyer.code) }}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="p-1">
-                                <label>Podpis sprzedawcy</label>
-                                {{ form_widget(form.seller.signature) }}
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="p-1">
-                                <label>Podpis nabywcy</label>
-                                {{ form_widget(form.buyer.signature) }}
-                            </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="p-1">
+                            <label>Podpis sprzedawcy</label>
+                            {{ form_widget(form.seller.signature) }}
                         </div>
                     </div>
+                    <div class="col-lg-6">
+                        <div class="p-1">
+                            <label>Podpis nabywcy</label>
+                            {{ form_widget(form.buyer.signature) }}
+                        </div>
+                    </div>
+                </div>
 
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="p-5">
-                                <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Nazwa towaru lub usługi</h1>
-                                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Nazwa towaru lub usługi</h1>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <table class="table table-striped">
-                            <thead>
-                            <tr>
-                                <th scope="col">lp.</th>
-                                <th scope="col">Nazwa towaru/usługi</th>
-                                <th scope="col">Ilość</th>
-                                <th scope="col">Jm</th>
-                                <th scope="col">Cena netto</th>
-                                <th scope="col">VAT</th>
-                                <th scope="col">Kwota brutto</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for item in form.items %}
-                            <tr>
-                                <th scope="row">1.</th>
-                                <td>{{ form_widget(item.name) }}</td>
-                                <td>{{ form_widget(item.quantity) }}</td>
-                                <td>{{ form_widget(item.measure) }}</td>
-                                <td>{{ form_widget(item.netPrice) }}</td>
-                                <td>{{ form_widget(item.vatRate) }}</td>
-                                <td>{{ form_widget(item.grossPrice) }}</td>
-                                <td></td>
-                            </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
+                </div>
 
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="p-3">
-                                <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Płatność</h1>
-                                </div>
-                            </div>
-                        </div>
+                <div class="row container" style="border-top: 1px solid; border-bottom: 1px solid;">
+                    <div class="col-lg-4">
+                        Nazwa towaru/usługi
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="p-1">
-                                <label>Status</label>
-                                {{ form_widget(form.payment.status) }}
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="p-1">
-                                <label>Sposób płatności</label>
-                                {{ form_widget(form.payment.method) }}
-                            </div>
-                        </div>
+                    <div class="col-lg-2">
+                        Ilość
                     </div>
+                    <div class="col-lg-1">
+                        Jm
+                    </div>
+                    <div class="col-lg-2">
+                        Cena netto
+                    </div>
+                    <div class="col-lg-1">
+                        VAT (%)
+                    </div>
+                    <div class="col-lg-2">
+                        Kwota brutto
+                    </div>
+                </div>
+                <div class="row container" style="">
 
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="p-5">
-                                <div class="text-center">
-                                    {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary btn-user btn-block m-auto'}}) }}
+                </div>
+                {% form_theme form
+                    'jquery.collection.html.twig'
+                    'invoice/itemTemplateForm.html.twig' %}
 
-                                </div>
+                {{ form(form.items) }}
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="p-3">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Płatność</h1>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="p-1">
+                            <label>Status</label>
+                            {{ form_widget(form.payment.status) }}
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="p-1">
+                            <label>Sposób płatności</label>
+                            {{ form_widget(form.payment.method) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="p-5">
+                            <div class="text-center">
+                                {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary btn-user btn-block m-auto'}}) }}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 {{ form_end(form) }}
             </div>
         </div>
     </div>
 
+{% endblock %}
+
+{% block javascripts %}
+
+    <script type="text/javascript">
+        $('.item').collection();
+    </script>
 {% endblock %}

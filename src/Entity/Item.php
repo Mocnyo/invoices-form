@@ -33,7 +33,7 @@ class Item
     private $netPrice;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="float")
      */
     private $grossPrice;
 
@@ -43,7 +43,7 @@ class Item
     private $vatRate;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      */
     private $measure;
 
@@ -59,75 +59,115 @@ class Item
         return $this->id;
     }
 
-    public function getName(): ?string
+    /**
+     * @return mixed
+     */
+    public function getName()
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    /**
+     * @param mixed $name
+     */
+    public function setName($name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
-    public function getQuantity(): ?int
+    /**
+     * @return mixed
+     */
+    public function getQuantity()
     {
         return $this->quantity;
     }
 
-    public function setQuantity(int $quantity): self
+    /**
+     * @param mixed $quantity
+     */
+    public function setQuantity($quantity): void
     {
         $this->quantity = $quantity;
-
-        return $this;
     }
 
-    public function getNetPrice(): ?float
+    /**
+     * @return mixed
+     */
+    public function getNetPrice()
     {
         return $this->netPrice;
     }
 
-    public function setNetPrice(float $netPrice): self
+    /**
+     * @param mixed $netPrice
+     */
+    public function setNetPrice($netPrice): void
     {
         $this->netPrice = $netPrice;
-
-        return $this;
     }
 
-    public function getGrossPrice(): ?string
+    /**
+     * @return mixed
+     */
+    public function getGrossPrice()
     {
         return $this->grossPrice;
     }
 
-    public function setGrossPrice(string $grossPrice): self
+    /**
+     * @param mixed $grossPrice
+     */
+    public function setGrossPrice($grossPrice): void
     {
         $this->grossPrice = $grossPrice;
-
-        return $this;
     }
 
-    public function getVatRate(): ?int
+    /**
+     * @return mixed
+     */
+    public function getVatRate()
     {
         return $this->vatRate;
     }
 
-    public function setVatRate(int $vatRate): self
+    /**
+     * @param mixed $vatRate
+     */
+    public function setVatRate($vatRate): void
     {
         $this->vatRate = $vatRate;
-
-        return $this;
     }
 
-    public function getMeasure(): ?string
+    /**
+     * @return mixed
+     */
+    public function getMeasure()
     {
         return $this->measure;
     }
 
-    public function setMeasure(string $measure): self
+    /**
+     * @param mixed $measure
+     */
+    public function setMeasure($measure): void
     {
         $this->measure = $measure;
+    }
 
-        return $this;
+    /**
+     * @return Invoice
+     */
+    public function getInvoice(): Invoice
+    {
+        return $this->invoice;
+    }
+
+    /**
+     * @param Invoice $invoice
+     */
+    public function setInvoice(Invoice $invoice): void
+    {
+        $this->invoice = $invoice;
     }
 }

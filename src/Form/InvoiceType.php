@@ -52,6 +52,13 @@ class InvoiceType extends AbstractType
                 'entry_type' => ItemType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
+                'prototype' => true,
+                'attr' => array(
+                    'class' => 'item',
+                ),
+                'entry_options' => [
+                    'label' => false
+                ]
             ])
             ->add('payment', PaymentType::class, [
                 'mapped' => false
@@ -89,9 +96,18 @@ class InvoiceType extends AbstractType
                 $payment->setMethod($data['payment']['method']);
                 $payment->setStatus($data['payment']['status']);
 
-                $invoice->setContractors([$seller,$buyer]);
+                $invoice->setContractors([$seller, $buyer]);
                 $invoice->setPayment($payment);
             })
-            ;
+            ->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
+                $data = $event->getData();
+                /** @var Invoice $invoice */
+                $invoice = $data;
+                $items = $invoice->getItems();
+
+                foreach ($items as $item) {
+                    $item->setInvoice($invoice);
+                }
+            });
     }
 }

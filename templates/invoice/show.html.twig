@@ -55,7 +55,7 @@
                                 </div>
 
                                 <div class="row">
-                                    {% for contractor in invoice.contractor %}
+                                    {% for contractor in invoice.contractors %}
                                     {% if contractor.type == constant('App\\Entity\\Enums\\ContractorTypeEnum::SELLER') %}
                                     <div class="col-lg-6">
                                         <p class="card-text">Nazwa: {{ contractor.name }}</p>
@@ -109,7 +109,7 @@
                                         <td>{{ item.vatRate }}%</td>
                                         <td>{{ item.grossPrice }}</td>
                                     </tr>
-                                        {% set sum = item.grossPrice + sum %}
+                                        {% set sum = item.grossPrice*item.quantity + sum %}
                                     {% endfor %}
                                     </tbody>
                                 </table>

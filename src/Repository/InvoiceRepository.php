@@ -20,7 +20,7 @@ class InvoiceRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Invoice[] Returns an array of Invoice objects
+    //  * @return InvoicePdf[] Returns an array of InvoicePdf objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class InvoiceRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Invoice
+    public function findOneBySomeField($value): ?InvoicePdf
     {
         return $this->createQueryBuilder('i')
             ->andWhere('i.exampleField = :val')

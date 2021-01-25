@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Entity\Enums;
-
 
 use App\Exception\InvalidEnumValueException;
 
