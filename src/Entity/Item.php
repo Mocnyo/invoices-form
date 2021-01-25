@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Enums\MeasureTypeEnum;
 use App\Repository\ItemRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -28,11 +29,13 @@ class Item
     private $quantity;
 
     /**
+     * @var float
      * @ORM\Column(type="float")
      */
     private $netPrice;
 
     /**
+     * @var float
      * @ORM\Column(type="float")
      */
     private $grossPrice;
@@ -92,33 +95,33 @@ class Item
     }
 
     /**
-     * @return mixed
+     * @return float
      */
-    public function getNetPrice()
+    public function getNetPrice(): ?float
     {
         return $this->netPrice;
     }
 
     /**
-     * @param mixed $netPrice
+     * @param float $netPrice
      */
-    public function setNetPrice($netPrice): void
+    public function setNetPrice(float $netPrice): void
     {
         $this->netPrice = $netPrice;
     }
 
     /**
-     * @return mixed
+     * @return float
      */
-    public function getGrossPrice()
+    public function getGrossPrice(): ?float
     {
         return $this->grossPrice;
     }
 
     /**
-     * @param mixed $grossPrice
+     * @param float $grossPrice
      */
-    public function setGrossPrice($grossPrice): void
+    public function setGrossPrice(float $grossPrice): void
     {
         $this->grossPrice = $grossPrice;
     }
@@ -169,5 +172,14 @@ class Item
     public function setInvoice(Invoice $invoice): void
     {
         $this->invoice = $invoice;
+    }
+
+    /**
+     * @return string|null
+     * @throws \App\Exception\InvalidEnumValueException
+     */
+    public function getMeasureName(): ?string
+    {
+        return $this->getMeasure() !== null ? MeasureTypeEnum::getStringFromValue($this->getMeasure()) : null;
     }
 }

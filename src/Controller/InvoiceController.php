@@ -38,6 +38,8 @@ class InvoiceController extends AbstractController
             $invoiceToPdf->render($invoice, $this->renderView('document/invoicepdf.html.twig', [
                 'invoice' => $invoice
             ]));
+
+            return $this->redirect($request->headers->get('referer'));
         }
 
         return $this->render('invoice/new.html.twig', [

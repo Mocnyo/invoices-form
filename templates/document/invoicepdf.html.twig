@@ -166,20 +166,20 @@
                 Kwota VAT
             </td>
             <td>
-                Wartość Brutto
+                Wartosc Brutto
             </td>
         </tr>
-        {% set sum = 0 %}
+        {% set toPay = 0 %}
         {% for item in invoice.items %}
         <tr class="item">
             <td>
                 {{ item.name }}
             </td>
             <td>
-                {{ item.quantity }}
+                {{ item.measureName }}
             </td>
             <td>
-                {{ item.measure }}
+                {{ item.quantity }}
             </td>
             <td>
                 {{ item.netPrice }}
@@ -194,8 +194,7 @@
                 {{ item.grossPrice }}
             </td>
         </tr>
-            {% set sum = item.grossPrice*item.quantity + sum %}
-
+            {% set toPay = item.grossPrice + toPay %}
         {% endfor %}
 
         <tr class="total">
@@ -204,13 +203,13 @@
             <td></td>
             <td></td>
             <td></td>
-            <td colspan="2" style="text-align: right;"><b>Razem:</b> {{ sum }}zl</td>
+            <td colspan="2" style="text-align: right;"><b>Razem:</b> {{ toPay }}zl</td>
             <td></td>
         </tr>
         <br>
         <tr class="heading">
             <td>
-                Status platności
+                Status platnosci
             </td>
             <td></td>
             <td></td>
