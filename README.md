@@ -11,10 +11,10 @@ Used bundles:
 - ninsuo/symfony-collection
 
 #Functions:
-- Anonymous user can generate invoices.
-- Logged user as admin can see all generated invoices.
-- Logged user as admin can generate any invoice.
-- Logged user as admin can delete any invoice.
+- Anonymous user and logged user can generate invoices.
+- Only logged user as admin can see all generated invoices.
+- Only logged user as admin can generate any created invoice.
+- Only logged user as admin can delete any invoice.
 - Register is disabled for new users.
 - Invoices are generated as pdf file.
 
